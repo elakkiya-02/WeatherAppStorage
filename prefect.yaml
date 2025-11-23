@@ -1,13 +1,20 @@
 version: 3.0
 name: weather-ingestion-project
 
+#to clone from github
+pull:
+  - prefect.deployments.steps.git_clone:
+      repository: https://github.com/elakkiya-02/WeatherAppStorage
+      branch: main
+  - prefect.deployments.steps.pip_install_requirements:
+      requirements_file: requirements.txt
+      directory: "{{ git_clone.directory }}"
+
 deployments:
   - name: open-meteo-serverless
     entrypoint: src/data_ingestion/fetch_open_meteo.py:fetch_open_meteo_data_flow
     work_pool:
       name: default
-    storage:
-      block: github-repository/weather-storage
     tags:
       - weather
       - serverless

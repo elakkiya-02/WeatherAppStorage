@@ -4,6 +4,7 @@ name: weather-ingestion-project
 #to clone from github
 pull:
   - prefect.deployments.steps.git_clone:
+      id: git_clone
       repository: https://github.com/elakkiya-02/WeatherAppStorage
       branch: main
   - prefect.deployments.steps.pip_install_requirements:

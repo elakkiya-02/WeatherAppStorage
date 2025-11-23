@@ -1,0 +1,12 @@
+name: weather-ingestion-project
+
+deployments:
+  - name: open-meteo-serverless
+    entrypoint: src/data_ingestion/fetch_open_meteo.py:fetch_open_meteo_data_flow
+    work_pool:
+      name: default
+    storage:
+      block: weather-storage
+    tags:
+      - weather
+      - serverless
